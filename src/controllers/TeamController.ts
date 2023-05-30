@@ -34,12 +34,11 @@ class TeamController {
   
   public async deleteTeam(req: Request, res: Response): Promise<Response> {
     try{
-      const idTeam: any = req.params.uuid
+      const createTeam = req.body
       const teamRepository = AppDataSource.getRepository(Team)
-      const findTeam = await teamRepository.findOneBy({ id: idTeam })
+      const findTeam = await teamRepository.findOneBy({ id: createTeam.id })
       await teamRepository.remove(findTeam)
       return res.json({ "raw": [], "affected": 1 })
-
     }catch{
       return res.json({ "raw": [], "affected": 0 })
     }
@@ -47,14 +46,12 @@ class TeamController {
 
   public async putTeam(req: Request, res: Response): Promise<Response> {
     const createTeam = req.body
-    const idTeam: any = req.params.uuid
     const teamRepository = AppDataSource.getRepository(Team)
-    const findTeam = await teamRepository.findOneBy({ id: idTeam })
+    const findTeam = await teamRepository.findOneBy({ id: createTeam.id })
     findTeam.name = createTeam.name
     const allTeam = await teamRepository.save(findTeam)
     return res.json(allTeam)
   }
-
 }
 
 export default new TeamController();

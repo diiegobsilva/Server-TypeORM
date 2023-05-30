@@ -5,8 +5,8 @@ const routes = Router();
 
 routes.get('/', TeamController.getAllTeam);
 routes.get('/:termo', TeamController.getTermo);
-routes.post('/create', TeamController.postTeam);
-routes.put('/update/:uuid', TeamController.putTeam);
-routes.delete('/:uuid', TeamController.deleteTeam);
+routes.post('/', TeamController.postTeam);
+routes.put('/', TeamController.putTeam);
+routes.delete('/', TeamController.deleteTeam);
 
 export default routes;
